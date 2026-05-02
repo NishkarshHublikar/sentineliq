@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* --- Dark Mode (Default) --- */
+    --background:             240 10% 4%;
+    --foreground:             0 0% 98%;
+    --card:                   240 10% 6%;
+    --card-foreground:        0 0% 98%;
+    --popover:                240 10% 6%;
+    --popover-foreground:     0 0% 98%;
+    --primary:                217 91% 60%;
+    --primary-foreground:     210 40% 98%;
+    --secondary:              240 4% 16%;
+    --secondary-foreground:   0 0% 98%;
+    --muted:                  240 4% 16%;
+    --muted-foreground:       240 5% 64.9%;
+    --accent:                 240 4% 16%;
+    --accent-foreground:      0 0% 98%;
+    --destructive:            0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border:                 240 4% 16% / 0.4;
+    --input:                  240 4% 16% / 0.4;
+    --ring:                   217 91% 60%;
+    --radius:                 0.75rem;
+
+    /* Custom tokens */
+    --panel-bg:               240 10% 4%;
+    --panel-border:           240 4% 16% / 0.4;
+    --item-hover:             240 4% 16% / 0.6;
+    --warning:                38 92% 50%;
+    --chart-2:                142 70% 45%;
+    --glass-bg:               rgba(9, 9, 11, 0.7);
+    --glass-border:           rgba(255, 255, 255, 0.08);
+  }
+
+  .light {
+    /* --- Light Mode --- */
+    --background:             0 0% 100%;
+    --foreground:             240 10% 3.9%;
+    --card:                   0 0% 98%;
+    --card-foreground:        240 10% 3.9%;
+    --popover:                0 0% 100%;
+    --popover-foreground:     240 10% 3.9%;
+    --primary:                217 91% 60%;
+    --primary-foreground:     210 40% 98%;
+    --secondary:              240 5% 96%;
+    --secondary-foreground:   240 6% 10%;
+    --muted:                  240 5% 96%;
+    --muted-foreground:       240 4% 46%;
+    --accent:                 240 5% 96%;
+    --accent-foreground:      240 6% 10%;
+    --destructive:            0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border:                 240 6% 90%;
+    --input:                  240 6% 90%;
+    --ring:                   240 10% 3.9%;
+
+    /* Custom tokens */
+    --panel-bg:               0 0% 100%;
+    --panel-border:           240 6% 90%;
+    --item-hover:             240 5% 96%;
+    --warning:                38 92% 50%;
+    --chart-2:                142 70% 45%;
+    --glass-bg:               rgba(255, 255, 255, 0.7);
+    --glass-border:           rgba(0, 0, 0, 0.08);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Geist', system-ui, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    overflow: hidden;
+  }
+}
+
+/* ── Custom Utilities ────────────────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+.font-mono {
+  font-family: 'Geist Mono', monospace;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ── Selection ───────────────────────────────────────────────── */
+::selection {
+  background: hsl(var(--primary) / 0.2);
+  color: hsl(var(--primary));
+}

@@ -1,0 +1,21 @@
+id,lat,lng,type_id,severity,district,hour,day_of_week,month,temperature,precipitation,prev_crimes_24h,resolved,timestamp
+1,40.7589,-73.9851,violent,critical,Midtown,23,5,3,8.2,0.0,5,false,2024-03-15T23:14:00Z
+2,40.6892,-73.9442,theft,medium,Brooklyn,14,2,3,12.1,0.0,2,true,2024-03-15T14:22:00Z
+3,40.7282,-73.7949,property,high,Queens,19,4,3,11.8,1.2,3,false,2024-03-15T19:05:00Z
+4,40.8448,-73.8648,drug,high,Bronx,22,6,3,7.5,0.0,7,true,2024-03-15T22:33:00Z
+5,40.6501,-74.0051,vandalism,medium,Staten Island,16,1,3,13.4,0.0,1,true,2024-03-15T16:47:00Z
+6,40.7831,-73.9712,violent,high,Manhattan,21,0,3,9.1,0.0,4,false,2024-03-15T21:11:00Z
+7,40.7061,-74.0088,theft,medium,Manhattan,12,3,3,14.2,0.5,2,true,2024-03-15T12:58:00Z
+8,40.6782,-73.9442,property,critical,Brooklyn,3,6,3,5.8,0.0,8,false,2024-03-16T03:22:00Z
+9,40.7484,-73.9967,drug,medium,Midtown,20,4,3,10.5,2.1,3,true,2024-03-15T20:44:00Z
+10,40.7282,-73.7949,vandalism,medium,Queens,18,2,3,12.8,0.0,1,true,2024-03-15T18:30:00Z
+11,40.7589,-73.9851,violent,critical,Midtown,1,6,3,6.2,0.0,6,false,2024-03-16T01:05:00Z
+12,40.6501,-74.0051,theft,high,Staten Island,15,5,3,13.9,0.0,2,false,2024-03-15T15:18:00Z
+13,40.8448,-73.8648,property,medium,Bronx,11,3,3,16.1,0.8,2,true,2024-03-15T11:42:00Z
+14,40.7831,-73.9712,drug,high,Manhattan,23,0,3,8.7,0.0,5,false,2024-03-15T23:55:00Z
+15,40.7061,-74.0088,vandalism,medium,Manhattan,9,1,3,15.3,0.0,1,true,2024-03-15T09:27:00Z
+16,40.7128,-74.0059,violent,high,Manhattan,22,5,4,11.4,0.0,4,false,2024-04-01T22:08:00Z
+17,40.6892,-73.9442,theft,medium,Brooklyn,13,2,4,18.2,0.0,2,true,2024-04-01T13:31:00Z
+18,40.7282,-73.7949,property,critical,Queens,2,6,4,9.5,0.0,7,false,2024-04-02T02:44:00Z
+19,40.8448,-73.8648,drug,medium,Bronx,17,4,4,19.8,1.5,3,true,2024-04-01T17:19:00Z
+20,40.7589,-73.9851,violent,critical,Midtown,0,0,4,10.2,0.0,9,false,2024-04-02T00:01:00Z
