@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useRef, useEffect } from 'react'
-import Map, { Source, Layer, NavigationControl, FullscreenControl } from 'react-map-gl/maplibre'
+import Map, { Source, Layer, NavigationControl, FullscreenControl, GeolocateControl } from 'react-map-gl/maplibre'
 import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { useFilteredCrimes } from '@/hooks/useFilteredCrimes'
@@ -16,7 +16,7 @@ const MAP_STYLES = {
 
 export function VectorMap() {
   const mapRef = useRef<any>(null)
-  const { currentCity, layers, theme } = useAppStore()
+  const { currentCity, layers, theme, initLocation } = useAppStore()
   const crimes = useFilteredCrimes()
 
   useEffect(() => {
@@ -93,6 +93,19 @@ export function VectorMap() {
       >
         <NavigationControl position="bottom-right" />
         <FullscreenControl position="bottom-right" />
+        <GeolocateControl
+          position="bottom-right"
+          positionOptions={{ enableHighAccuracy: true }}
+          showUserHeading={true}
+          onGeolocate={(e: any) => {
+            initLocation({
+              name: 'My Location',
+              lat: e.coords.latitude,
+              lng: e.coords.longitude,
+              zoom: 14
+            })
+          }}
+        />
 
         <Source type="geojson" data={crimeData as any}>
           {layers.heat && <Layer {...heatmapLayer} />}

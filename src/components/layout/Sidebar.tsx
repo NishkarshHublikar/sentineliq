@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Search, MapPin, Loader2, Globe } from 'lucide-react'
+import { Search, MapPin, Loader2, Globe, Locate } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Switch } from '@/components/ui/switch'
 import { Separator } from '@/components/ui/separator'
@@ -64,6 +64,27 @@ export function Sidebar() {
     setSearch('')
     setResults([])
   }
+  
+  const handleLocateMe = () => {
+    if (!navigator.geolocation) return
+    setLoading(true)
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        initLocation({
+          name: 'My Location',
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+          zoom: 13
+        })
+        setLoading(false)
+      },
+      (err) => {
+        console.error(err)
+        setLoading(false)
+      },
+      { enableHighAccuracy: true }
+    )
+  }
 
   const TIME_OPTIONS: Array<[TimeFilter, string]> = [
     ['all',   'All time'],
@@ -107,9 +128,21 @@ export function Sidebar() {
                   if (e.target.value.length > 2) handleSearch(e.target.value)
                 }}
                 placeholder="Search city..."
-                className="w-full rounded-lg border border-border bg-secondary/30 py-1.5 pl-8 pr-3 text-[12px] outline-none transition-all focus:border-primary/50 focus:bg-secondary/50"
+                className="w-full rounded-lg border border-border bg-secondary/30 py-1.5 pl-8 pr-8 text-[12px] outline-none transition-all focus:border-primary/50 focus:bg-secondary/50"
               />
-              {loading && <Loader2 className="absolute right-2.5 top-1/2 -translate-y-1/2 animate-spin text-muted-foreground" size={12} />}
+              <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+                {loading ? (
+                  <Loader2 className="animate-spin text-muted-foreground" size={12} />
+                ) : (
+                  <button 
+                    onClick={handleLocateMe}
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                    title="Use my location"
+                  >
+                    <Locate size={13} />
+                  </button>
+                )}
+              </div>
             </div>
 
             <AnimatePresence>
