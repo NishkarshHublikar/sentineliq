@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useRef, useEffect } from 'react'
 import Map, { Source, Layer, NavigationControl, FullscreenControl } from 'react-map-gl/maplibre'
 import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
@@ -15,8 +15,20 @@ const MAP_STYLES = {
 }
 
 export function VectorMap() {
+  const mapRef = useRef<any>(null)
   const { currentCity, layers, theme } = useAppStore()
   const crimes = useFilteredCrimes()
+
+  useEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.flyTo({
+        center:   [currentCity.lng, currentCity.lat],
+        zoom:     currentCity.zoom,
+        duration: 2000,
+        essential: true
+      })
+    }
+  }, [currentCity])
 
   // Convert crimes to GeoJSON for react-map-gl
   const crimeData = useMemo(() => ({
@@ -68,6 +80,7 @@ export function VectorMap() {
   return (
     <div className="relative flex-1 overflow-hidden">
       <Map
+        ref={mapRef}
         mapLib={maplibregl}
         initialViewState={{
           latitude:  currentCity.lat,
