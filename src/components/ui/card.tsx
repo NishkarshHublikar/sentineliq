@@ -19,8 +19,8 @@ export function Card({
   ...props
 }: CardProps) {
   const base = cn(
-    'rounded-xl border border-white/[0.06] bg-zinc-900 overflow-hidden',
-    hover && 'transition-colors hover:border-white/[0.1]',
+    'rounded-xl border border-border bg-card overflow-hidden',
+    hover && 'transition-colors hover:border-border/60 hover:bg-accent/10',
     className
   )
 
@@ -58,7 +58,7 @@ export function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLPara
   return (
     <p
       className={cn(
-        'text-[11px] font-semibold uppercase tracking-widest text-zinc-400',
+        'text-[11px] font-semibold uppercase tracking-widest text-muted-foreground',
         className
       )}
       {...props}

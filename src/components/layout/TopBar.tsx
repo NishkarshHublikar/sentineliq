@@ -37,10 +37,10 @@ export function TopBar() {
       {/* Brand */}
       <div className="flex items-center gap-2.5 flex-shrink-0">
         <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[8px] bg-blue-600 ring-2 ring-zinc-950 ring-offset-1 ring-offset-blue-600/30">
-          <ShieldCheck size={15} className="text-white" strokeWidth={2} />
+          <ShieldCheck size={15} className="text-primary-foreground" strokeWidth={2} />
         </div>
         <div>
-          <div className="text-[13px] font-semibold leading-none text-white tracking-tight">
+          <div className="text-[13px] font-semibold leading-none text-foreground tracking-tight">
             SentinelIQ
           </div>
           <div className="mt-0.5 text-[10px] text-zinc-500 leading-none tracking-wide">
@@ -50,7 +50,7 @@ export function TopBar() {
       </div>
 
       {/* Divider */}
-      <div className="mx-1 h-5 w-px bg-white/[0.06]" />
+      <div className="mx-1 h-5 w-px bg-border" />
 
       {/* Tab navigation */}
       <nav className="flex items-center gap-1">
@@ -61,8 +61,8 @@ export function TopBar() {
             className={[
               'relative flex items-center gap-1.5 rounded-lg border px-3 py-[5px] text-[12px] font-medium transition-all duration-150',
               activeTab === item.id
-                ? 'border-white/[0.1] bg-zinc-800 text-white'
-                : 'border-transparent text-zinc-500 hover:text-zinc-300',
+                ? 'border-primary/20 bg-primary/10 text-foreground'
+                : 'border-transparent text-muted-foreground hover:text-foreground',
             ].join(' ')}
           >
             <span className={activeTab === item.id ? 'text-blue-400' : 'text-zinc-500'}>
@@ -120,7 +120,7 @@ export function TopBar() {
       <Tooltip tip={`Switch to ${role === 'admin' ? 'Officer' : 'Admin'} view`}>
         <button
           onClick={toggleRole}
-          className="flex items-center gap-2 rounded-lg border border-white/[0.08] bg-zinc-900 px-3 py-[5px] text-[12px] font-medium text-zinc-300 transition-colors hover:border-white/[0.14] hover:text-white"
+          className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-[5px] text-[12px] font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
         >
           <span className="flex h-[20px] w-[20px] items-center justify-center rounded-full bg-blue-600 text-[9px] font-bold text-white">
             {role === 'admin' ? 'A' : 'O'}

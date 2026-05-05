@@ -40,14 +40,14 @@ export function useSocket() {
     const city = currentCity
 
     const push = () => {
-      const type = CRIME_TYPES[randInt(0, CRIME_TYPES.length)]
+      const type = CRIME_TYPES[randInt(0, CRIME_TYPES.length - 1)]
       pushCrime({
         id:       `live-${Date.now()}`,
         lat:      city.lat + rand(-0.09, 0.09),
         lng:      city.lng + rand(-0.09, 0.09),
         typeId:   type.id as CrimeType,
-        severity: SEVERITIES[randInt(0, 3)] as Severity,
-        district: DISTRICTS[randInt(0, DISTRICTS.length)],
+        severity: SEVERITIES[randInt(0, SEVERITIES.length - 1)] as Severity,
+        district: DISTRICTS[randInt(0, DISTRICTS.length - 1)],
         hour:     new Date().getHours(),
         ts:       new Date(),
         resolved: false,

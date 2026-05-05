@@ -29,8 +29,13 @@ const CITIES = {
 }
 
 const rand    = (a, b) => a + Math.random() * (b - a)
-const randInt = (a, b) => Math.floor(rand(a, b))
-const pick    = (arr)  => arr[randInt(0, arr.length)]
+const randInt = (a, b) => {
+  if (b === undefined) { b = a; a = 0 }
+  const min = Math.ceil(Math.min(a, b))
+  const max = Math.floor(Math.max(a, b))
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+const pick    = (arr)  => arr[randInt(0, arr.length - 1)]
 
 // ── Express + Socket.IO setup ─────────────────────────────────────
 const app    = express()

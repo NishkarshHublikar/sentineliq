@@ -40,34 +40,34 @@
 
   .light {
     /* --- Light Mode --- */
-    --background:             0 0% 100%;
-    --foreground:             240 10% 3.9%;
-    --card:                   0 0% 98%;
-    --card-foreground:        240 10% 3.9%;
+    --background:             210 20% 98%;
+    --foreground:             220 20% 10%;
+    --card:                   0 0% 100%;
+    --card-foreground:        220 20% 10%;
     --popover:                0 0% 100%;
-    --popover-foreground:     240 10% 3.9%;
+    --popover-foreground:     220 20% 10%;
     --primary:                217 91% 60%;
     --primary-foreground:     210 40% 98%;
-    --secondary:              240 5% 96%;
-    --secondary-foreground:   240 6% 10%;
-    --muted:                  240 5% 96%;
-    --muted-foreground:       240 4% 46%;
-    --accent:                 240 5% 96%;
-    --accent-foreground:      240 6% 10%;
+    --secondary:              220 15% 94%;
+    --secondary-foreground:   220 20% 10%;
+    --muted:                  220 15% 94%;
+    --muted-foreground:       220 10% 45%;
+    --accent:                 220 15% 94%;
+    --accent-foreground:      220 20% 10%;
     --destructive:            0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border:                 240 6% 90%;
-    --input:                  240 6% 90%;
-    --ring:                   240 10% 3.9%;
+    --border:                 220 15% 90%;
+    --input:                  220 15% 90%;
+    --ring:                   217 91% 60%;
 
     /* Custom tokens */
-    --panel-bg:               0 0% 100%;
-    --panel-border:           240 6% 90%;
-    --item-hover:             240 5% 96%;
+    --panel-bg:               210 20% 98%;
+    --panel-border:           220 15% 90%;
+    --item-hover:             220 15% 94%;
     --warning:                38 92% 50%;
     --chart-2:                142 70% 45%;
-    --glass-bg:               rgba(255, 255, 255, 0.7);
-    --glass-border:           rgba(0, 0, 0, 0.08);
+    --glass-bg:               rgba(255, 255, 255, 0.6);
+    --glass-border:           rgba(0, 0, 0, 0.05);
   }
 }
 

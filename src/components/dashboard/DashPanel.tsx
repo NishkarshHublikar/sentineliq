@@ -9,17 +9,18 @@ import {
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useAppStore } from '@/lib/store'
+import { randInt, CRIME_TYPES, DISTRICTS } from '@/lib/utils'
 
-const GRID_COLOR   = 'var(--border)'
-const TICK_COLOR   = 'var(--muted-foreground)'
+const GRID_COLOR   = 'hsl(var(--border))'
+const TICK_COLOR   = 'hsl(var(--muted-foreground))'
 const TOOLTIP_STYLE = (theme: string) => ({
   contentStyle: { 
-    background: theme === 'dark' ? '#18181b' : '#ffffff', 
-    border: '1px solid var(--border)', 
+    background: 'hsl(var(--card))', 
+    border: '1px solid hsl(var(--border))', 
     borderRadius: 10, 
     fontSize: 12 
   },
-  labelStyle:   { color: 'var(--foreground)' },
+  labelStyle:   { color: 'hsl(var(--foreground))' },
 })
 
 export function DashPanel() {
@@ -140,7 +141,7 @@ export function DashPanel() {
                     {hourData.map((entry, i) => (
                       <Cell
                         key={i}
-                        fill={entry.count > 52 ? 'var(--destructive)' : entry.count > 38 ? 'var(--warning)' : 'var(--primary)'}
+                        fill={entry.count > 52 ? 'hsl(var(--destructive))' : entry.count > 38 ? 'hsl(var(--warning))' : 'hsl(var(--primary))'}
                         fillOpacity={0.75}
                       />
                     ))}
@@ -163,8 +164,8 @@ export function DashPanel() {
                   <YAxis tick={{ fill: TICK_COLOR, fontSize: 10 }} tickLine={false} axisLine={false} />
                   <Tooltip {...TOOLTIP_STYLE(theme)} />
                   <Legend wrapperStyle={{ fontSize: 11, color: TICK_COLOR }} />
-                  <Bar dataKey="actual"    name="Actual"    fill="var(--primary)" fillOpacity={0.65} radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="predicted" name="Predicted" fill="var(--chart-2)" fillOpacity={0.5}  radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="actual"    name="Actual"    fill="hsl(var(--primary))" fillOpacity={0.65} radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="predicted" name="Predicted" fill="hsl(var(--chart-2))" fillOpacity={0.5}  radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>

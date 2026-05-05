@@ -9,7 +9,12 @@ export function cn(...inputs: ClassValue[]) {
 
 // ── Random helpers ────────────────────────────────────────────────
 export const rand    = (a: number, b: number) => a + Math.random() * (b - a)
-export const randInt = (a: number, b: number) => Math.floor(rand(a, b))
+export const randInt = (a: number, b?: number) => {
+  if (b === undefined) { b = a; a = 0 }
+  const min = Math.ceil(Math.min(a, b))
+  const max = Math.floor(Math.max(a, b))
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
 
 // ── City configs ──────────────────────────────────────────────────
 export const CITIES: Record<CityKey, CityConfig> = {
@@ -91,18 +96,18 @@ export function generateCrimes(n: number, cityKey: CityKey) {
   ]
 
   return Array.from({ length: n }, (_, i) => {
-    const cl = clusters[randInt(0, clusters.length)]
+    const cl = clusters[randInt(0, clusters.length - 1)]
     const sigma = 0.018 / cl.w
-    const type = CRIME_TYPES[randInt(0, CRIME_TYPES.length)]
-    const hr = randInt(0, 24)
-    const daysAgo = randInt(0, 30)
+    const type = CRIME_TYPES[randInt(0, CRIME_TYPES.length - 1)]
+    const hr = randInt(0, 23)
+    const daysAgo = randInt(0, 29)
     return {
       id:       `seed-${i}`,
       lat:      cl.lat + rand(-sigma * 2, sigma * 2),
       lng:      cl.lng + rand(-sigma * 2, sigma * 2),
       typeId:   type.id as CrimeType,
-      severity: SEVERITIES[randInt(0, 3)],
-      district: DISTRICTS[randInt(0, DISTRICTS.length)],
+      severity: SEVERITIES[randInt(0, SEVERITIES.length - 1)],
+      district: DISTRICTS[randInt(0, DISTRICTS.length - 1)],
       hour:     hr,
       ts:       new Date(Date.now() - daysAgo * 86400000 - hr * 3600000),
       resolved: Math.random() > 0.6,

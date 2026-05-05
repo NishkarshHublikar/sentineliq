@@ -74,7 +74,7 @@ export function Sidebar() {
   ]
 
   const KPI_ITEMS = [
-    { label: 'Total',    value: stats.total,    color: 'var(--foreground)' },
+    { label: 'Total',    value: stats.total,    color: 'hsl(var(--foreground))' },
     { label: 'Critical', value: stats.critical, color: '#ef4444' },
     { label: 'Resolved', value: stats.resolved, color: '#22c55e' },
     { label: 'Patrols',  value: 5,              color: '#3b82f6' },
