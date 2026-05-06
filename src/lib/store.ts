@@ -36,6 +36,7 @@ interface AppStore {
   initCity:       (city: CityKey) => void
   initLocation:   (config: CityConfig) => void
   setTheme:       (theme: Theme) => void
+  setRole:        (role: Role) => void
 }
 
 export const useAppStore = create<AppStore>((set, get) => ({
@@ -138,4 +139,6 @@ export const useAppStore = create<AppStore>((set, get) => ({
   },
 
   setTheme: (theme) => set({ theme }),
+
+  setRole: (role) => set({ role }),
 }))

@@ -2,12 +2,21 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ShieldCheck, Radio, Brain, Map, Sun, Moon } from 'lucide-react'
+import { ShieldCheck, Radio, Brain, Map, Sun, Moon, LogOut, User, Settings } from 'lucide-react'
+import { signOut, useSession } from 'next-auth/react'
 import { Badge } from '@/components/ui/badge'
 import { LiveDot } from '@/components/ui/live-dot'
 import { Tooltip } from '@/components/ui/tooltip'
 import { useAppStore } from '@/lib/store'
-import type { TabId } from '@/types'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import type { TabId, Role } from '@/types'
 
 const NAV_ITEMS: Array<{ id: TabId; label: string; icon: React.ReactNode }> = [
   { id: 'map',  label: 'Live Map',  icon: <Map size={13} /> },
@@ -16,8 +25,15 @@ const NAV_ITEMS: Array<{ id: TabId; label: string; icon: React.ReactNode }> = [
 ]
 
 export function TopBar() {
-  const { activeTab, setTab, role, toggleRole, anomaly, theme, setTheme } = useAppStore()
+  const { data: session } = useSession()
+  const { activeTab, setTab, setRole, anomaly, theme, setTheme } = useAppStore()
   const [clock, setClock] = useState('')
+
+  useEffect(() => {
+    if (session?.user?.role) {
+      setRole(session.user.role as Role)
+    }
+  }, [session, setRole])
 
   useEffect(() => {
     const tick = () =>
@@ -116,18 +132,44 @@ export function TopBar() {
         {clock}
       </span>
 
-      {/* Role toggle */}
-      <Tooltip tip={`Switch to ${role === 'admin' ? 'Officer' : 'Admin'} view`}>
-        <button
-          onClick={toggleRole}
-          className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-[5px] text-[12px] font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground"
-        >
-          <span className="flex h-[20px] w-[20px] items-center justify-center rounded-full bg-blue-600 text-[9px] font-bold text-white">
-            {role === 'admin' ? 'A' : 'O'}
-          </span>
-          {role === 'admin' ? 'Administrator' : 'Officer'}
-        </button>
-      </Tooltip>
+      {/* User profile */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button className="flex items-center gap-2 rounded-lg border border-border bg-card px-2.5 py-[5px] text-[12px] font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground">
+            <div className="flex h-[22px] w-[22px] items-center justify-center rounded-full bg-blue-600 text-[9px] font-bold text-white overflow-hidden border border-white/10">
+              {session?.user?.image ? (
+                <img src={session.user.image} alt="User" className="h-full w-full object-cover" />
+              ) : (
+                <span>{session?.user?.name?.[0] || 'U'}</span>
+              )}
+            </div>
+            <div className="flex flex-col items-start leading-none">
+              <span className="text-[11px] text-foreground font-semibold">{session?.user?.name?.split(' ')[0]}</span>
+              <span className="text-[9px] text-zinc-500 uppercase tracking-tighter">{session?.user?.role}</span>
+            </div>
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-48">
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => window.location.href = '/profile'}>
+            <User size={14} className="mr-2" />
+            Profile Settings
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => window.location.href = '/profile'}>
+            <Settings size={14} className="mr-2" />
+            Security (MFA)
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem 
+            className="text-red-400 focus:text-red-400" 
+            onClick={() => signOut({ callbackUrl: '/login' })}
+          >
+            <LogOut size={14} className="mr-2" />
+            Sign Out
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </motion.header>
   )
 }
