@@ -24,6 +24,11 @@ export default withAuth(
       return NextResponse.redirect(new URL("/mfa", req.url))
     }
 
+    // Protect admin routes
+    if (req.nextUrl.pathname.startsWith("/admin") && token.role !== "admin") {
+      return NextResponse.redirect(new URL("/", req.url))
+    }
+
     return null
   },
   {

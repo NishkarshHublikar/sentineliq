@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ShieldCheck, Radio, Brain, Map, Sun, Moon, LogOut, User, Settings } from 'lucide-react'
+import { ShieldCheck, Radio, Brain, Map, Sun, Moon, LogOut, User, Settings, LayoutDashboard } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
 import { Badge } from '@/components/ui/badge'
 import { LiveDot } from '@/components/ui/live-dot'
@@ -156,6 +156,12 @@ export function TopBar() {
             <User size={14} className="mr-2" />
             Profile Settings
           </DropdownMenuItem>
+          {session?.user?.role === 'admin' && (
+            <DropdownMenuItem onClick={() => window.location.href = '/admin/users'}>
+              <LayoutDashboard size={14} className="mr-2" />
+              Admin Portal
+            </DropdownMenuItem>
+          )}
           <DropdownMenuItem onClick={() => window.location.href = '/profile'}>
             <Settings size={14} className="mr-2" />
             Security (MFA)
