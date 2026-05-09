@@ -169,7 +169,7 @@ export function TopBar() {
           <DropdownMenuSeparator />
           <DropdownMenuItem 
             className="text-red-400 focus:text-red-400" 
-            onClick={() => signOut({ callbackUrl: '/login' })}
+            onClick={() => signOut({ callbackUrl: session?.user?.role === 'admin' ? '/admin' : '/login' })}
           >
             <LogOut size={14} className="mr-2" />
             Sign Out

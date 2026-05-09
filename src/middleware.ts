@@ -5,17 +5,29 @@ export default withAuth(
   function middleware(req) {
     const token = req.nextauth.token
     const isAuth = !!token
-    const isLoginPage = req.nextUrl.pathname.startsWith("/login")
-    const isMfaPage = req.nextUrl.pathname.startsWith("/mfa")
+    const pathname = req.nextUrl.pathname
+    
+    const isLoginPage = pathname === "/login"
+    const isAdminLoginPage = pathname === "/admin"
+    const isMfaPage = pathname === "/mfa"
 
-    if (isLoginPage) {
+    // If user is already authenticated, don't let them go back to login pages
+    if (isLoginPage || isAdminLoginPage) {
       if (isAuth) {
+        // Redirect based on role
+        if (token.role === 'admin') {
+          return NextResponse.redirect(new URL("/admin/users", req.url))
+        }
         return NextResponse.redirect(new URL("/", req.url))
       }
       return null
     }
 
+    // Handle unauthenticated users
     if (!isAuth) {
+      if (pathname.startsWith("/admin")) {
+        return NextResponse.redirect(new URL("/admin", req.url))
+      }
       return NextResponse.redirect(new URL("/login", req.url))
     }
 
@@ -24,8 +36,8 @@ export default withAuth(
       return NextResponse.redirect(new URL("/mfa", req.url))
     }
 
-    // Protect admin routes
-    if (req.nextUrl.pathname.startsWith("/admin") && token.role !== "admin") {
+    // Role-based access control for /admin routes
+    if (pathname.startsWith("/admin") && token.role !== "admin") {
       return NextResponse.redirect(new URL("/", req.url))
     }
 
@@ -34,9 +46,9 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ token, req }) => {
-        // Paths that don't require authentication
-        const publicPaths = ["/login", "/api/auth"]
-        if (publicPaths.some(path => req.nextUrl.pathname.startsWith(path))) {
+        const pathname = req.nextUrl.pathname
+        const publicPaths = ["/login", "/admin", "/api/auth"]
+        if (publicPaths.some(path => pathname === path || pathname.startsWith("/api/auth"))) {
           return true
         }
         return !!token

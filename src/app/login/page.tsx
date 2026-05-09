@@ -57,7 +57,7 @@ export default function LoginPage() {
             <ShieldCheck className="text-white" size={24} />
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-white">SentinelIQ</h1>
-          <p className="mt-2 text-sm text-zinc-400">Secure Law Enforcement Portal</p>
+          <p className="mt-2 text-sm text-zinc-400">Intelligence & Operations Portal</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
